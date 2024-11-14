@@ -1,51 +1,25 @@
-﻿using StrategyPattern.Ducks;
-using StrategyPattern.Interfaces.FlyBehavior;
-using System.Xml.Schema;
-
-namespace StrategyPattern
+﻿namespace FacadePattern
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Duck mallardDuck = new MallardDuck();
-            mallardDuck.Display();
-            mallardDuck.PerformQuack();
-            mallardDuck.PerformFly();
-            mallardDuck.PerformSwim();
+            Amplifier amp = new Amplifier();
+            CdPlayer cdPlayer = new CdPlayer(amp);
+            DvdPlayer dvdPlayer = new DvdPlayer(amp);
+            PopcornPopper popcornPopper = new PopcornPopper();
+            Projector projector = new Projector();
+            Screen screen = new Screen();
+            TheaterLights lights = new TheaterLights();
+            Tuner tuner = new Tuner(amp);
 
-            Duck redheadDuck = new RedheadDuck();
-            redheadDuck.Display();
-            redheadDuck.PerformQuack();
-            redheadDuck.PerformFly();
-            redheadDuck.PerformSwim();
+            HomeTheaterFacade homeTheater = new HomeTheaterFacade(amp, tuner, dvdPlayer, cdPlayer, projector, screen, lights, popcornPopper);
 
-            Duck decoyDuck = new DecoyDuck();
-            decoyDuck.Display();
-            decoyDuck.PerformQuack();
-            decoyDuck.PerformFly();
-            decoyDuck.PerformSwim();
+            homeTheater.WatchMovie("Die Hard");
 
-            Duck rubberDuck = new RubberDuck();
-            rubberDuck.Display();
-            rubberDuck.PerformQuack();
-            rubberDuck.PerformFly();
-            rubberDuck.PerformSwim();
+            Console.WriteLine("Movie is playing...");
 
-            Duck robotDuck = new RobotDuck();
-            robotDuck.Display();
-            robotDuck.PerformQuack();
-            robotDuck.PerformFly();
-            robotDuck.SetFlybehavior(new FlyRocketPowered());
-            robotDuck.PerformFly();
-            robotDuck.PerformSwim();
-
-           
-            
-
-
-
-
+            homeTheater.EndMovie();
         }
     }
 }

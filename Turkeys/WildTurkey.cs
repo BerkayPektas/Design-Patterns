@@ -5,18 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdapterPattern
+namespace AdapterPattern.Turkeys
 {
-    internal class MallardDuck : Duck
+    internal class WildTurkey : Turkey
     {
         public void Fly()
         {
-            Console.WriteLine("I'm flying");
+            Console.WriteLine("Gobble gobble");
         }
 
-        public void Quack()
+        public void Gobble()
         {
-            Console.WriteLine("Quack");
+            Console.WriteLine("I'm flying a short distance");
         }
     }
 }

@@ -7,16 +7,23 @@ using System.Threading.Tasks;
 
 namespace AdapterPattern
 {
-    internal class MallardDuck : Duck
+    internal class GooseAdapter : Duck
     {
-        public void Fly()
+        private Goose goose;
+
+        public GooseAdapter(Goose goose)
         {
-            Console.WriteLine("I'm flying");
+            this.goose = goose;
         }
 
         public void Quack()
         {
-            Console.WriteLine("Quack");
+            goose.Honk();
+        }
+
+        public void Fly()
+        {
+            goose.Fly();
         }
     }
 }

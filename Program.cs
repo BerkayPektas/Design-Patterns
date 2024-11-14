@@ -1,51 +1,49 @@
-﻿using StrategyPattern.Ducks;
-using StrategyPattern.Interfaces.FlyBehavior;
-using System.Xml.Schema;
+﻿using AdapterPattern.Interfaces;
+using AdapterPattern.Turkeys;
+using System;
 
-namespace StrategyPattern
+namespace AdapterPattern
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Duck mallardDuck = new MallardDuck();
-            mallardDuck.Display();
-            mallardDuck.PerformQuack();
-            mallardDuck.PerformFly();
-            mallardDuck.PerformSwim();
+            // Let's make a duck and a turkey
+            MallardDuck duck = new MallardDuck();
+            WildTurkey turkey = new WildTurkey();
+            // Let's wrap the turkey in an adapter to make it look like a Duck
+            Duck turkeyAdapter = new TurkeyAdapter(turkey);
 
-            Duck redheadDuck = new RedheadDuck();
-            redheadDuck.Display();
-            redheadDuck.PerformQuack();
-            redheadDuck.PerformFly();
-            redheadDuck.PerformSwim();
+            // Testing the turkey.
+            Console.WriteLine("The Turkey says...");
+            turkey.Gobble();
+            turkey.Fly();
 
-            Duck decoyDuck = new DecoyDuck();
-            decoyDuck.Display();
-            decoyDuck.PerformQuack();
-            decoyDuck.PerformFly();
-            decoyDuck.PerformSwim();
+            // Testing the duck with the testDuck() method, which expects a Duck object
+            Console.WriteLine("The Duck says...");
+            TestDuck(duck);
 
-            Duck rubberDuck = new RubberDuck();
-            rubberDuck.Display();
-            rubberDuck.PerformQuack();
-            rubberDuck.PerformFly();
-            rubberDuck.PerformSwim();
+            // Now let's test the turkey using the testDuck() method
+            // (which still expects a Duck object)
+            Console.WriteLine("The TurkeyAdapter says...");
+            TestDuck(turkeyAdapter);
 
-            Duck robotDuck = new RobotDuck();
-            robotDuck.Display();
-            robotDuck.PerformQuack();
-            robotDuck.PerformFly();
-            robotDuck.SetFlybehavior(new FlyRocketPowered());
-            robotDuck.PerformFly();
-            robotDuck.PerformSwim();
+            CanadaGoose goose = new CanadaGoose();
+            Duck gooseAdapter = new GooseAdapter(goose);
 
-           
-            
+            Console.WriteLine("The Goose says...");
+            goose.Honk();
+            goose.Fly();
 
+            Console.WriteLine("The GooseAdapter says...");
+            TestDuck(gooseAdapter);
+        }
 
-
-
+        // Method to get a duck to call its Quack() and Fly() methods
+        static void TestDuck(Duck duck)
+        {
+            duck.Quack();
+            duck.Fly();
         }
     }
 }

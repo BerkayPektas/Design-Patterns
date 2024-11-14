@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace AdapterPattern
 {
-    internal class MallardDuck : Duck
+    internal class CanadaGoose : Goose
     {
         public void Fly()
         {
             Console.WriteLine("I'm flying");
         }
 
-        public void Quack()
+        public void Honk()
         {
-            Console.WriteLine("Quack");
+            Console.WriteLine("Honk...");
         }
     }
 }

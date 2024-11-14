@@ -1,51 +1,23 @@
-﻿using StrategyPattern.Ducks;
-using StrategyPattern.Interfaces.FlyBehavior;
-using System.Xml.Schema;
+﻿using ObserverPattern.Displays;
 
-namespace StrategyPattern
+namespace ObserverPattern
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Duck mallardDuck = new MallardDuck();
-            mallardDuck.Display();
-            mallardDuck.PerformQuack();
-            mallardDuck.PerformFly();
-            mallardDuck.PerformSwim();
+            WeatherData weatherData = new WeatherData();
 
-            Duck redheadDuck = new RedheadDuck();
-            redheadDuck.Display();
-            redheadDuck.PerformQuack();
-            redheadDuck.PerformFly();
-            redheadDuck.PerformSwim();
+            CurrentConditionDisplay currentDisplay = new CurrentConditionDisplay(weatherData);
+            ForecastDisplay forecastDisplay = new ForecastDisplay(weatherData);
+            StatisticsDisplay statisticsDisplay = new StatisticsDisplay(weatherData);
 
-            Duck decoyDuck = new DecoyDuck();
-            decoyDuck.Display();
-            decoyDuck.PerformQuack();
-            decoyDuck.PerformFly();
-            decoyDuck.PerformSwim();
+            weatherData.SetMeasurements(26.6f, 65, 1013.1f);
+            weatherData.SetMeasurements(27.2f, 70, 1012.5f);
+            weatherData.SetMeasurements(28.4f, 90, 1011.3f);
 
-            Duck rubberDuck = new RubberDuck();
-            rubberDuck.Display();
-            rubberDuck.PerformQuack();
-            rubberDuck.PerformFly();
-            rubberDuck.PerformSwim();
-
-            Duck robotDuck = new RobotDuck();
-            robotDuck.Display();
-            robotDuck.PerformQuack();
-            robotDuck.PerformFly();
-            robotDuck.SetFlybehavior(new FlyRocketPowered());
-            robotDuck.PerformFly();
-            robotDuck.PerformSwim();
-
-           
-            
-
-
-
-
+            weatherData.RemoveObserver(currentDisplay);
+            weatherData.SetMeasurements(25.3f, 60, 1010.5f);
         }
     }
 }

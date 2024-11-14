@@ -19,7 +19,7 @@ namespace StrategyPattern.Ducks
         }
         public override void Display()
         {
-            Console.WriteLine("I'm a Decoy Duck");
+            Console.WriteLine("I'm a Decoy Duck!");
         }
     }
 }
